@@ -19,6 +19,10 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AlbumFilterInput: { // input type
+    query?: string | null; // String
+    year?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -59,6 +63,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
+    albums: NexusGenRootTypes['Album'][]; // [Album!]!
   }
 }
 
@@ -70,6 +75,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     album: 'Album'
+    albums: 'Album'
   }
 }
 
@@ -77,6 +83,9 @@ export interface NexusGenArgTypes {
   Query: {
     album: { // args
       id: string; // String!
+    }
+    albums: { // args
+      filter: NexusGenInputs['AlbumFilterInput']; // AlbumFilterInput!
     }
   }
 }
@@ -89,7 +98,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

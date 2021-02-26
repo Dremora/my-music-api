@@ -8,6 +8,12 @@ type Album {
   title: String!
 }
 
+input AlbumFilterInput {
+  query: String
+  year: Int
+}
+
 type Query {
   album(id: String!): Album!
+  albums(filter: AlbumFilterInput!): [Album!]!
 }
