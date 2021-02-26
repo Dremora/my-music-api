@@ -16,6 +16,9 @@ export const album = objectType({
           where: {
             albumId: parent.id,
           },
+          orderBy: {
+            id: "asc",
+          },
         });
       },
     });
