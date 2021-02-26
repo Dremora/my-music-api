@@ -4,8 +4,11 @@
 
 type Album {
   artist: String!
-  id: String!
+  comments: String
+  id: ID!
+  sources: [Source!]!
   title: String!
+  year: Int
 }
 
 input AlbumFilterInput {
@@ -13,7 +16,28 @@ input AlbumFilterInput {
   year: Int
 }
 
+enum Location {
+  APPLE_MUSIC
+  FOOBAR2000
+  GOOGLE_MUSIC
+  SPOTIFY
+}
+
 type Query {
-  album(id: String!): Album!
+  album(id: ID!): Album!
   albums(filter: AlbumFilterInput!): [Album!]!
+}
+
+type Source {
+  accurateRip: String
+  comments: String
+  cueIssues: String
+  discs: Int
+  download: String
+  edition: String
+  format: String
+  id: ID!
+  location: Location!
+  mbid: String
+  tagIssues: String
 }

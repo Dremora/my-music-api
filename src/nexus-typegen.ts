@@ -26,6 +26,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Location: "APPLE_MUSIC" | "FOOBAR2000" | "GOOGLE_MUSIC" | "SPOTIFY"
 }
 
 export interface NexusGenScalars {
@@ -39,10 +40,24 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Album: { // root type
     artist: string; // String!
-    id: string; // String!
+    comments?: string | null; // String
+    id: string; // ID!
     title: string; // String!
+    year?: number | null; // Int
   }
   Query: {};
+  Source: { // root type
+    accurateRip?: string | null; // String
+    comments?: string | null; // String
+    cueIssues?: string | null; // String
+    discs?: number | null; // Int
+    download?: string | null; // String
+    edition?: string | null; // String
+    format?: string | null; // String
+    location: NexusGenEnums['Location']; // Location!
+    mbid?: string | null; // String
+    tagIssues?: string | null; // String
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -53,36 +68,68 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Album: { // field return type
     artist: string; // String!
-    id: string; // String!
+    comments: string | null; // String
+    id: string; // ID!
+    sources: NexusGenRootTypes['Source'][]; // [Source!]!
     title: string; // String!
+    year: number | null; // Int
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
     albums: NexusGenRootTypes['Album'][]; // [Album!]!
+  }
+  Source: { // field return type
+    accurateRip: string | null; // String
+    comments: string | null; // String
+    cueIssues: string | null; // String
+    discs: number | null; // Int
+    download: string | null; // String
+    edition: string | null; // String
+    format: string | null; // String
+    id: string; // ID!
+    location: NexusGenEnums['Location']; // Location!
+    mbid: string | null; // String
+    tagIssues: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Album: { // field return type name
     artist: 'String'
-    id: 'String'
+    comments: 'String'
+    id: 'ID'
+    sources: 'Source'
     title: 'String'
+    year: 'Int'
   }
   Query: { // field return type name
     album: 'Album'
     albums: 'Album'
+  }
+  Source: { // field return type name
+    accurateRip: 'String'
+    comments: 'String'
+    cueIssues: 'String'
+    discs: 'Int'
+    download: 'String'
+    edition: 'String'
+    format: 'String'
+    id: 'ID'
+    location: 'Location'
+    mbid: 'String'
+    tagIssues: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
   Query: {
     album: { // args
-      id: string; // String!
+      id: string; // ID!
     }
     albums: { // args
       filter: NexusGenInputs['AlbumFilterInput']; // AlbumFilterInput!
@@ -100,7 +147,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

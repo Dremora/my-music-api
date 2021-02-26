@@ -10,9 +10,6 @@ node_modules/
 .DS_Store
 
 # Prisma
-/api.graphql
-/prisma/migrations/**/*.md
 /prisma/.env
-/prisma/migrations/**/*
 
 /dist/
