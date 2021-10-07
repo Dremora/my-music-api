@@ -26,6 +26,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Format: "APE" | "FLAC" | "MIXED" | "MP3" | "MPC" | "TAK" | "WMA"
   Location: "APPLE_MUSIC" | "FOOBAR2000" | "GOOGLE_MUSIC" | "SPOTIFY"
 }
 
@@ -53,7 +54,7 @@ export interface NexusGenObjects {
     discs?: number | null; // Int
     download?: string | null; // String
     edition?: string | null; // String
-    format?: string | null; // String
+    format?: NexusGenEnums['Format'] | null; // Format
     location: NexusGenEnums['Location']; // Location!
     mbid?: string | null; // String
     tagIssues?: string | null; // String
@@ -90,7 +91,7 @@ export interface NexusGenFieldTypes {
     discs: number | null; // Int
     download: string | null; // String
     edition: string | null; // String
-    format: string | null; // String
+    format: NexusGenEnums['Format'] | null; // Format
     id: string; // ID!
     location: NexusGenEnums['Location']; // Location!
     mbid: string | null; // String
@@ -118,7 +119,7 @@ export interface NexusGenFieldTypeNames {
     discs: 'Int'
     download: 'String'
     edition: 'String'
-    format: 'String'
+    format: 'Format'
     id: 'ID'
     location: 'Location'
     mbid: 'String'

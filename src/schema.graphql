@@ -16,6 +16,16 @@ input AlbumFilterInput {
   year: Int
 }
 
+enum Format {
+  APE
+  FLAC
+  MIXED
+  MP3
+  MPC
+  TAK
+  WMA
+}
+
 enum Location {
   APPLE_MUSIC
   FOOBAR2000
@@ -35,7 +45,7 @@ type Source {
   discs: Int
   download: String
   edition: String
-  format: String
+  format: Format
   id: ID!
   location: Location!
   mbid: String
