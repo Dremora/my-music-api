@@ -12,7 +12,7 @@
     "prisma:introspect": "prisma introspect",
     "types:generate": "ts-node --transpile-only src/schema",
     "db:migrate": "prisma migrate deploy --preview-feature",
-    "build": "yarn types:generate && tsc",
+    "build": "tsc",
     "start": "NODE_ENV=production node .",
     "lint": "eslint . --ext ts"
   },
