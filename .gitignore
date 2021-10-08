@@ -9,7 +9,7 @@ node_modules/
 # macOS
 .DS_Store
 
-# Prisma
-/prisma/.env
+# Env
+/.env
 
 /dist/
