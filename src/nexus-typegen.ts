@@ -5,7 +5,7 @@
 
 
 import type { Context } from "./context"
-import type { Source } from "@prisma/client"
+import type { Album, Source } from "@prisma/client"
 
 
 
@@ -35,12 +35,14 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Album: { // root type
-    artist: string; // String!
-    comments?: string | null; // String
-    id: string; // ID!
-    title: string; // String!
-    year?: number | null; // Int
+  Album: Album;
+  FirstPlayedDate: { // root type
+    day?: number | null; // Int
+    month?: number | null; // Int
+    year: number; // Int!
+  }
+  FirstPlayedTime: { // root type
+    timestamp: number; // Int!
   }
   Query: {};
   Source: Source;
@@ -50,9 +52,10 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
+  FirstPlayed: NexusGenRootTypes['FirstPlayedDate'] | NexusGenRootTypes['FirstPlayedTime'];
 }
 
-export type NexusGenRootTypes = NexusGenObjects
+export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
 
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
@@ -60,10 +63,19 @@ export interface NexusGenFieldTypes {
   Album: { // field return type
     artist: string; // String!
     comments: string | null; // String
+    firstPlayed: NexusGenRootTypes['FirstPlayed'] | null; // FirstPlayed
     id: string; // ID!
     sources: NexusGenRootTypes['Source'][]; // [Source!]!
     title: string; // String!
     year: number | null; // Int
+  }
+  FirstPlayedDate: { // field return type
+    day: number | null; // Int
+    month: number | null; // Int
+    year: number; // Int!
+  }
+  FirstPlayedTime: { // field return type
+    timestamp: number; // Int!
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
@@ -88,10 +100,19 @@ export interface NexusGenFieldTypeNames {
   Album: { // field return type name
     artist: 'String'
     comments: 'String'
+    firstPlayed: 'FirstPlayed'
     id: 'ID'
     sources: 'Source'
     title: 'String'
     year: 'Int'
+  }
+  FirstPlayedDate: { // field return type name
+    day: 'Int'
+    month: 'Int'
+    year: 'Int'
+  }
+  FirstPlayedTime: { // field return type name
+    timestamp: 'Int'
   }
   Query: { // field return type name
     album: 'Album'
@@ -124,6 +145,7 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  FirstPlayed: "FirstPlayedDate" | "FirstPlayedTime"
 }
 
 export interface NexusGenTypeInterfaces {
@@ -139,11 +161,11 @@ export type NexusGenInterfaceNames = never;
 
 export type NexusGenScalarNames = keyof NexusGenScalars;
 
-export type NexusGenUnionNames = never;
+export type NexusGenUnionNames = keyof NexusGenUnions;
 
 export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
 
-export type NexusGenAbstractsUsingStrategyResolveType = never;
+export type NexusGenAbstractsUsingStrategyResolveType = "FirstPlayed";
 
 export type NexusGenFeaturesConfig = {
   abstractTypeStrategies: {

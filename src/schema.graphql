@@ -5,6 +5,7 @@
 type Album {
   artist: String!
   comments: String
+  firstPlayed: FirstPlayed
   id: ID!
   sources: [Source!]!
   title: String!
@@ -14,6 +15,18 @@ type Album {
 input AlbumFilterInput {
   query: String
   year: Int
+}
+
+union FirstPlayed = FirstPlayedDate | FirstPlayedTime
+
+type FirstPlayedDate {
+  day: Int
+  month: Int
+  year: Int!
+}
+
+type FirstPlayedTime {
+  timestamp: Int!
 }
 
 enum Format {
