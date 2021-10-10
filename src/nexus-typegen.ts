@@ -5,14 +5,10 @@
 
 
 import type { Context } from "./context"
+import type { Source } from "@prisma/client"
 
 
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    model: NexusPrisma<TypeName, 'model'>
-    crud: any
-  }
-}
+
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -47,18 +43,7 @@ export interface NexusGenObjects {
     year?: number | null; // Int
   }
   Query: {};
-  Source: { // root type
-    accurateRip?: string | null; // String
-    comments?: string | null; // String
-    cueIssues?: string | null; // String
-    discs?: number | null; // Int
-    download?: string | null; // String
-    edition?: string | null; // String
-    format?: NexusGenEnums['Format'] | null; // Format
-    location: NexusGenEnums['Location']; // Location!
-    mbid?: string | null; // String
-    tagIssues?: string | null; // String
-  }
+  Source: Source;
 }
 
 export interface NexusGenInterfaces {

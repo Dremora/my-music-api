@@ -1,3 +1,4 @@
+export * from "./enums";
 export * from "./Album";
 export * from "./Source";
 export * from "./Query";
