@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Generate Prisma types
+        run: yarn prisma:generate
+
       - name: Run ESLint
         run: yarn lint
 
