@@ -22,14 +22,11 @@ export const album = objectType({
           return {
             timestamp: getUnixTime(parent.firstPlayedTimestamp),
           };
-        } else if (
-          parent.firstPlayedDate &&
-          parent.firstPlayedDate.length > 0
-        ) {
+        } else if (parent.firstPlayedDate && parent.firstPlayedDate[0]) {
           return {
             year: parent.firstPlayedDate[0],
-            month: parent.firstPlayedDate[1],
-            day: parent.firstPlayedDate[2],
+            month: parent.firstPlayedDate[1] ?? null,
+            day: parent.firstPlayedDate[2] ?? null,
           };
         } else {
           return null;
