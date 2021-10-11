@@ -11,7 +11,7 @@
     "prisma:generate": "prisma generate",
     "prisma:introspect": "prisma introspect",
     "types:generate": "ts-node --transpile-only src/schema",
-    "db:migrate": "prisma migrate deploy --preview-feature",
+    "db:migrate": "prisma migrate deploy",
     "build": "tsc",
     "start": "NODE_ENV=production node .",
     "lint": "eslint . --ext ts"
