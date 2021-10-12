@@ -1,12 +1,12 @@
 {
   "name": "my-music-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/Dremora/my-music-api",
   "author": "Kirill Korolyov <kirill.korolyov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only -- ./src/index.ts",
+    "dev": "ts-node-dev --transpile-only -- ./src/server.ts",
     "dev:typecheck": "tsc --noEmit --watch",
     "prisma:generate": "prisma generate",
     "prisma:introspect": "prisma introspect",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@prisma/client": "^3.2.1",
     "apollo-server": "^3.3.0",
+    "apollo-server-micro": "^3.4.0",
     "date-fns": "^2.25.0",
     "graphql": "^15.6.1",
     "nexus": "^1.1.0",
