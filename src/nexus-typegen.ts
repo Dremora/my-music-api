@@ -87,6 +87,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
+    albumPerFirstPlayedYearCount: NexusGenRootTypes['AlbumPerYearCount'][]; // [AlbumPerYearCount!]!
     albumPerYearCount: NexusGenRootTypes['AlbumPerYearCount'][]; // [AlbumPerYearCount!]!
     albums: NexusGenRootTypes['Album'][]; // [Album!]!
   }
@@ -129,6 +130,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     album: 'Album'
+    albumPerFirstPlayedYearCount: 'AlbumPerYearCount'
     albumPerYearCount: 'AlbumPerYearCount'
     albums: 'Album'
   }

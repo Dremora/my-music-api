@@ -53,6 +53,7 @@ enum Location {
 
 type Query {
   album(id: ID!): Album!
+  albumPerFirstPlayedYearCount: [AlbumPerYearCount!]!
   albumPerYearCount: [AlbumPerYearCount!]!
   albums(filter: AlbumFilterInput!): [Album!]!
 }
