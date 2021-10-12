@@ -36,6 +36,10 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Album: Album;
+  AlbumPerYearCount: { // root type
+    count: number; // Int!
+    year: number; // Int!
+  }
   FirstPlayedDate: { // root type
     day?: number | null; // Int
     month?: number | null; // Int
@@ -69,6 +73,10 @@ export interface NexusGenFieldTypes {
     title: string; // String!
     year: number | null; // Int
   }
+  AlbumPerYearCount: { // field return type
+    count: number; // Int!
+    year: number; // Int!
+  }
   FirstPlayedDate: { // field return type
     day: number | null; // Int
     month: number | null; // Int
@@ -79,6 +87,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
+    albumPerYearCount: NexusGenRootTypes['AlbumPerYearCount'][]; // [AlbumPerYearCount!]!
     albums: NexusGenRootTypes['Album'][]; // [Album!]!
   }
   Source: { // field return type
@@ -106,6 +115,10 @@ export interface NexusGenFieldTypeNames {
     title: 'String'
     year: 'Int'
   }
+  AlbumPerYearCount: { // field return type name
+    count: 'Int'
+    year: 'Int'
+  }
   FirstPlayedDate: { // field return type name
     day: 'Int'
     month: 'Int'
@@ -116,6 +129,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     album: 'Album'
+    albumPerYearCount: 'AlbumPerYearCount'
     albums: 'Album'
   }
   Source: { // field return type name

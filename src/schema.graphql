@@ -17,6 +17,11 @@ input AlbumFilterInput {
   year: Int
 }
 
+type AlbumPerYearCount {
+  count: Int!
+  year: Int!
+}
+
 union FirstPlayed = FirstPlayedDate | FirstPlayedTime
 
 type FirstPlayedDate {
@@ -48,6 +53,7 @@ enum Location {
 
 type Query {
   album(id: ID!): Album!
+  albumPerYearCount: [AlbumPerYearCount!]!
   albums(filter: AlbumFilterInput!): [Album!]!
 }
 
