@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
-import { Source } from "nexus-prisma";
+import { Source as PrismaSource } from "nexus-prisma";
 
-export const source = objectType({
+export const Source = objectType({
   name: "Source",
   sourceType: {
     module: "@prisma/client",
@@ -9,19 +9,19 @@ export const source = objectType({
   },
   definition(t) {
     t.field({
-      ...Source.id,
+      ...PrismaSource.id,
       type: "ID",
       resolve: (parent) => parent.id.toString(),
     });
-    t.field(Source.accurateRip);
-    t.field(Source.comments);
-    t.field(Source.cueIssues);
-    t.field(Source.discs);
-    t.field(Source.download);
-    t.field(Source.edition);
-    t.field(Source.format);
-    t.field(Source.location);
-    t.field(Source.mbid);
-    t.field(Source.tagIssues);
+    t.field(PrismaSource.accurateRip);
+    t.field(PrismaSource.comments);
+    t.field(PrismaSource.cueIssues);
+    t.field(PrismaSource.discs);
+    t.field(PrismaSource.download);
+    t.field(PrismaSource.edition);
+    t.field(PrismaSource.format);
+    t.field(PrismaSource.location);
+    t.field(PrismaSource.mbid);
+    t.field(PrismaSource.tagIssues);
   },
 });
