@@ -6,7 +6,7 @@ type Album {
   artist: String!
   comments: String
   firstPlayed: FirstPlayed
-  id: ID!
+  id: UUID!
   sources: [Source!]!
   title: String!
   year: Int
@@ -56,7 +56,7 @@ type Mutation {
 }
 
 type Query {
-  album(id: ID!): Album!
+  album(id: UUID!): Album!
   albumPerFirstPlayedYearCount: [AlbumPerYearCount!]!
   albumPerYearCount: [AlbumPerYearCount!]!
   albums(filter: AlbumFilterInput!): [Album!]!
@@ -72,6 +72,11 @@ type Source {
   format: Format
   id: ID!
   location: Location!
-  mbid: String
+  mbid: UUID
   tagIssues: String
 }
+
+"""
+A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier.
+"""
+scalar UUID

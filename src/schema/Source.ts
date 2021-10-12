@@ -24,7 +24,7 @@ export const Source = objectType({
       name: "location",
       type: "Location",
     });
-    t.nullable.string("mbid");
+    t.nullable.uuid("mbid");
     t.nullable.string("tagIssues");
   },
 });

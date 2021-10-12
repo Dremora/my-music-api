@@ -8,7 +8,7 @@ export const Album = objectType({
     export: "Album",
   },
   definition(t) {
-    t.id("id");
+    t.uuid("id");
     t.string("title");
     t.string("artist");
     t.nullable.string("comments");

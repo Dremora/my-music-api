@@ -6,8 +6,23 @@
 
 import type { Context } from "./context"
 import type { Album, Source } from "@prisma/client"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier.
+     */
+    uuid<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "UUID";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier.
+     */
+    uuid<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "UUID";
+  }
+}
 
 
 declare global {
@@ -32,6 +47,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  UUID: string
 }
 
 export interface NexusGenObjects {
@@ -69,7 +85,7 @@ export interface NexusGenFieldTypes {
     artist: string; // String!
     comments: string | null; // String
     firstPlayed: NexusGenRootTypes['FirstPlayed'] | null; // FirstPlayed
-    id: string; // ID!
+    id: NexusGenScalars['UUID']; // UUID!
     sources: NexusGenRootTypes['Source'][]; // [Source!]!
     title: string; // String!
     year: number | null; // Int
@@ -105,7 +121,7 @@ export interface NexusGenFieldTypes {
     format: NexusGenEnums['Format'] | null; // Format
     id: string; // ID!
     location: NexusGenEnums['Location']; // Location!
-    mbid: string | null; // String
+    mbid: NexusGenScalars['UUID'] | null; // UUID
     tagIssues: string | null; // String
   }
 }
@@ -115,7 +131,7 @@ export interface NexusGenFieldTypeNames {
     artist: 'String'
     comments: 'String'
     firstPlayed: 'FirstPlayed'
-    id: 'ID'
+    id: 'UUID'
     sources: 'Source'
     title: 'String'
     year: 'Int'
@@ -151,7 +167,7 @@ export interface NexusGenFieldTypeNames {
     format: 'Format'
     id: 'ID'
     location: 'Location'
-    mbid: 'String'
+    mbid: 'UUID'
     tagIssues: 'String'
   }
 }
@@ -164,7 +180,7 @@ export interface NexusGenArgTypes {
   }
   Query: {
     album: { // args
-      id: string; // ID!
+      id: NexusGenScalars['UUID']; // UUID!
     }
     albums: { // args
       filter: NexusGenInputs['AlbumFilterInput']; // AlbumFilterInput!

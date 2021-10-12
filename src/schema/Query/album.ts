@@ -1,9 +1,9 @@
-import { idArg, queryField } from "nexus";
+import { queryField } from "nexus";
 
 export const albumQuery = queryField("album", {
   type: "Album",
   args: {
-    id: idArg(),
+    id: "UUID",
   },
   resolve(_, { id }, ctx) {
     return ctx.prisma.album.findUnique({

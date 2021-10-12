@@ -6,3 +6,4 @@ export * from "./Mutation";
 export * from "./inputs";
 export * from "./FirstPlayed";
 export * from "./AlbumPerYearCount";
+export * from "./scalars";
