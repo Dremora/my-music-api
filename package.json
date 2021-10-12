@@ -1,12 +1,12 @@
 {
   "name": "my-music-api",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "dist/src/index.js",
   "repository": "https://github.com/Dremora/my-music-api",
   "author": "Kirill Korolyov <kirill.korolyov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only -- ./src/server.ts",
+    "dev": "ts-node-dev --transpile-only -- ./src/index.ts",
     "dev:typecheck": "tsc --noEmit --watch",
     "prisma:generate": "prisma generate",
     "prisma:introspect": "prisma introspect",
