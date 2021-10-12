@@ -51,6 +51,10 @@ enum Location {
   SPOTIFY
 }
 
+type Mutation {
+  login(password: String!): Boolean!
+}
+
 type Query {
   album(id: ID!): Album!
   albumPerFirstPlayedYearCount: [AlbumPerYearCount!]!

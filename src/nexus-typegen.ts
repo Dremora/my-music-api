@@ -48,6 +48,7 @@ export interface NexusGenObjects {
   FirstPlayedTime: { // root type
     timestamp: number; // Int!
   }
+  Mutation: {};
   Query: {};
   Source: Source;
 }
@@ -84,6 +85,9 @@ export interface NexusGenFieldTypes {
   }
   FirstPlayedTime: { // field return type
     timestamp: number; // Int!
+  }
+  Mutation: { // field return type
+    login: boolean; // Boolean!
   }
   Query: { // field return type
     album: NexusGenRootTypes['Album']; // Album!
@@ -128,6 +132,9 @@ export interface NexusGenFieldTypeNames {
   FirstPlayedTime: { // field return type name
     timestamp: 'Int'
   }
+  Mutation: { // field return type name
+    login: 'Boolean'
+  }
   Query: { // field return type name
     album: 'Album'
     albumPerFirstPlayedYearCount: 'AlbumPerYearCount'
@@ -150,6 +157,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    login: { // args
+      password: string; // String!
+    }
+  }
   Query: {
     album: { // args
       id: string; // ID!
