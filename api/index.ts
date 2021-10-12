@@ -3,7 +3,7 @@ import { ApolloServer } from "apollo-server-micro";
 import { context } from "../src/context";
 import { schema } from "../src/schema";
 
-const server = new ApolloServer({ schema, context });
+const server = new ApolloServer({ schema, context, introspection: true });
 
 const startServer = server.start();
 
