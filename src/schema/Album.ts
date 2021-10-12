@@ -1,6 +1,5 @@
 import { getUnixTime } from "date-fns";
 import { list, objectType } from "nexus";
-import { Album as PrismaAlbum } from "nexus-prisma";
 
 export const Album = objectType({
   name: "Album",
@@ -9,11 +8,11 @@ export const Album = objectType({
     export: "Album",
   },
   definition(t) {
-    t.field(PrismaAlbum.id);
-    t.field(PrismaAlbum.title);
-    t.field(PrismaAlbum.artist);
-    t.field(PrismaAlbum.comments);
-    t.field(PrismaAlbum.year);
+    t.id("id");
+    t.string("title");
+    t.string("artist");
+    t.nullable.string("comments");
+    t.nullable.int("year");
     t.nullable.field({
       name: "firstPlayed",
       type: "FirstPlayed",

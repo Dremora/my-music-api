@@ -1,5 +1,4 @@
 import { objectType } from "nexus";
-import { Source as PrismaSource } from "nexus-prisma";
 
 export const Source = objectType({
   name: "Source",
@@ -8,20 +7,24 @@ export const Source = objectType({
     export: "Source",
   },
   definition(t) {
-    t.field({
-      ...PrismaSource.id,
-      type: "ID",
+    t.id("id", {
       resolve: (parent) => parent.id.toString(),
     });
-    t.field(PrismaSource.accurateRip);
-    t.field(PrismaSource.comments);
-    t.field(PrismaSource.cueIssues);
-    t.field(PrismaSource.discs);
-    t.field(PrismaSource.download);
-    t.field(PrismaSource.edition);
-    t.field(PrismaSource.format);
-    t.field(PrismaSource.location);
-    t.field(PrismaSource.mbid);
-    t.field(PrismaSource.tagIssues);
+    t.nullable.string("accurateRip");
+    t.nullable.string("comments");
+    t.nullable.string("cueIssues");
+    t.nullable.int("discs");
+    t.nullable.string("download");
+    t.nullable.string("edition");
+    t.nullable.field({
+      name: "format",
+      type: "Format",
+    });
+    t.field({
+      name: "location",
+      type: "Location",
+    });
+    t.nullable.string("mbid");
+    t.nullable.string("tagIssues");
   },
 });
