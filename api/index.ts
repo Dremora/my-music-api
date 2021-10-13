@@ -1,10 +1,14 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { ApolloServer } from "apollo-server-micro";
 
-import { context } from "../src/context";
+import { createContext } from "../src/context";
 import { schema } from "../src/schema";
 
-const server = new ApolloServer({ schema, context, introspection: true });
+const server = new ApolloServer({
+  schema,
+  context: createContext,
+  introspection: true,
+});
 
 const startServer = server.start();
 

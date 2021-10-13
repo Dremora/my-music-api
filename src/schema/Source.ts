@@ -1,5 +1,7 @@
 import { objectType } from "nexus";
 
+import { loggedInField } from "./auth";
+
 export const Source = objectType({
   name: "Source",
   sourceType: {
@@ -14,7 +16,7 @@ export const Source = objectType({
     t.nullable.string("comments");
     t.nullable.string("cueIssues");
     t.nullable.int("discs");
-    t.nullable.string("download");
+    t.nullable.string("download", loggedInField);
     t.nullable.string("edition");
     t.nullable.field({
       name: "format",
