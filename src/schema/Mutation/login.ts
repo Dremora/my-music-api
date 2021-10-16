@@ -1,6 +1,6 @@
 import { mutationField } from "nexus";
 
-import { getEnvVariable } from "../../config";
+import { verify } from "../../authentication";
 
 export const login = mutationField("login", {
   type: "Boolean",
@@ -8,6 +8,6 @@ export const login = mutationField("login", {
     password: "String",
   },
   resolve(_, { password }) {
-    return password === getEnvVariable("USER_PASSWORD");
+    return verify(password);
   },
 });

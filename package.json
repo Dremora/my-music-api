@@ -27,7 +27,8 @@
     "graphql-scalars": "^1.11.1",
     "micro": "^9.3.4",
     "nexus": "^1.1.0",
-    "nexus-prisma": "^0.34.0"
+    "nexus-prisma": "^0.34.0",
+    "zod": "^3.9.8"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",

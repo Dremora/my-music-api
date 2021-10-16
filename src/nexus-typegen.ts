@@ -35,6 +35,18 @@ export interface NexusGenInputs {
     query?: string | null; // String
     year?: number | null; // Int
   }
+  NewSourceInput: { // input type
+    accurateRip?: string | null; // String
+    comments?: string | null; // String
+    cueIssues?: string | null; // String
+    discs?: number | null; // Int
+    download?: string | null; // String
+    edition?: string | null; // String
+    format?: NexusGenEnums['Format'] | null; // Format
+    location: NexusGenEnums['Location']; // Location!
+    mbid?: NexusGenScalars['UUID'] | null; // UUID
+    tagIssues?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -104,6 +116,7 @@ export interface NexusGenFieldTypes {
     timestamp: number; // Int!
   }
   Mutation: { // field return type
+    createAlbum: NexusGenRootTypes['Album']; // Album!
     login: boolean; // Boolean!
   }
   Query: { // field return type
@@ -150,6 +163,7 @@ export interface NexusGenFieldTypeNames {
     timestamp: 'Int'
   }
   Mutation: { // field return type name
+    createAlbum: 'Album'
     login: 'Boolean'
   }
   Query: { // field return type name
@@ -175,6 +189,13 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createAlbum: { // args
+      artist: string; // String!
+      comments?: string | null; // String
+      sources: NexusGenInputs['NewSourceInput'][]; // [NewSourceInput!]!
+      title: string; // String!
+      year?: number | null; // Int
+    }
     login: { // args
       password: string; // String!
     }

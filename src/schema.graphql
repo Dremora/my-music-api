@@ -52,7 +52,21 @@ enum Location {
 }
 
 type Mutation {
+  createAlbum(artist: String!, comments: String, sources: [NewSourceInput!]!, title: String!, year: Int): Album!
   login(password: String!): Boolean!
+}
+
+input NewSourceInput {
+  accurateRip: String
+  comments: String
+  cueIssues: String
+  discs: Int
+  download: String
+  edition: String
+  format: Format
+  location: Location!
+  mbid: UUID
+  tagIssues: String
 }
 
 type Query {
