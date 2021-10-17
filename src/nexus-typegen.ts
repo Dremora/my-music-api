@@ -35,6 +35,12 @@ export interface NexusGenInputs {
     query?: string | null; // String
     year?: number | null; // Int
   }
+  FirstPlayedInput: { // input type
+    day?: number | null; // Int
+    month?: number | null; // Int
+    timestamp?: number | null; // Int
+    year?: number | null; // Int
+  }
   NewSourceInput: { // input type
     accurateRip?: string | null; // String
     comments?: string | null; // String
@@ -192,6 +198,7 @@ export interface NexusGenArgTypes {
     createAlbum: { // args
       artist: string; // String!
       comments?: string | null; // String
+      firstPlayed?: NexusGenInputs['FirstPlayedInput'] | null; // FirstPlayedInput
       sources: NexusGenInputs['NewSourceInput'][]; // [NewSourceInput!]!
       title: string; // String!
       year?: number | null; // Int

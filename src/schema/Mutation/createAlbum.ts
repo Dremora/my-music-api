@@ -1,4 +1,4 @@
-import { intArg, list, mutationField, nullable, stringArg } from "nexus";
+import { arg, intArg, list, mutationField, nullable, stringArg } from "nexus";
 
 // createAlbum(
 //   firstPlayed: FirstPlayedInput
@@ -14,9 +14,17 @@ export const createAlbumMutation = mutationField("createAlbum", {
     comments: nullable(stringArg()),
     year: nullable(intArg()),
     sources: list("NewSourceInput"),
+    firstPlayed: nullable(arg({ type: "FirstPlayedInput" })),
   },
   authorize: (_root, _args, ctx) => ctx.loggedIn,
-  async resolve(_, { artist, title, comments, year, sources }, ctx) {
-    return createAlbum({ artist, title, comments, year, sources }, ctx.prisma);
+  async resolve(
+    _,
+    { artist, title, comments, year, sources, firstPlayed },
+    ctx
+  ) {
+    return createAlbum(
+      { artist, firstPlayed, title, comments, year, sources },
+      ctx.prisma
+    );
   },
 });

@@ -30,6 +30,13 @@ type FirstPlayedDate {
   year: Int!
 }
 
+input FirstPlayedInput {
+  day: Int
+  month: Int
+  timestamp: Int
+  year: Int
+}
+
 type FirstPlayedTime {
   timestamp: Int!
 }
@@ -52,7 +59,7 @@ enum Location {
 }
 
 type Mutation {
-  createAlbum(artist: String!, comments: String, sources: [NewSourceInput!]!, title: String!, year: Int): Album!
+  createAlbum(artist: String!, comments: String, firstPlayed: FirstPlayedInput, sources: [NewSourceInput!]!, title: String!, year: Int): Album!
   login(password: String!): Boolean!
 }
 

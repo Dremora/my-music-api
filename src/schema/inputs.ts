@@ -23,3 +23,13 @@ export const NewSourceInput = inputObjectType({
     t.nullable.string("tagIssues");
   },
 });
+
+export const FirstPlayedInput = inputObjectType({
+  name: "FirstPlayedInput",
+  definition(t) {
+    t.nullable.int("day");
+    t.nullable.int("month");
+    t.nullable.int("year");
+    t.nullable.int("timestamp");
+  },
+});
