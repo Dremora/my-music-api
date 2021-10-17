@@ -1,3 +1,4 @@
+import { UserInputError } from "apollo-server";
 import { fromUnixTime } from "date-fns";
 import { Format, Location } from "nexus-prisma";
 import { z } from "zod";
@@ -19,6 +20,19 @@ const newSourceSchema = z.object({
   location: z.enum(Location.members),
   mbid: z.nullable(z.optional(z.string().length(36))), // TODO regex)?
   tagIssues: z.nullable(z.optional(z.string().max(255).transform(trim))),
+});
+
+const sourceSchema = newSourceSchema.extend({
+  id: z
+    .nullable(
+      z.optional(
+        z
+          .string()
+          .regex(/[1-9][0-9]*/g)
+          .transform(BigInt)
+      )
+    )
+    .transform((id) => id ?? undefined),
 });
 
 const firstPlayedTimestampSchema = z
@@ -68,6 +82,14 @@ const newAlbumSchema = z.object({
   firstPlayed: firstPlayedSchema,
 });
 
+const albumSchema = newAlbumSchema.extend({
+  id: z
+    .string()
+    .length(36)
+    .regex(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/g),
+  sources: z.array(sourceSchema),
+});
+
 export const createAlbum = async (
   album: NexusGenArgTypes["Mutation"]["createAlbum"],
   prisma: PrismaClient
@@ -76,5 +98,64 @@ export const createAlbum = async (
 
   return prisma.album.create({
     data: { ...parsedAlbum, ...firstPlayed, sources: { create: sources } },
+  });
+};
+
+export const updateAlbum = async (
+  album: NexusGenArgTypes["Mutation"]["updateAlbum"],
+  prisma: PrismaClient
+) => {
+  const { sources, firstPlayed, ...parsedAlbum } = albumSchema.parse(album);
+
+  const sourceIds = await prisma.source.findMany({
+    select: {
+      id: true,
+    },
+    where: {
+      albumId: parsedAlbum.id,
+    },
+  });
+
+  const sourceIdsToDelete = sourceIds.filter(
+    (source) => !sources.find((s) => s.id === source.id)
+  );
+
+  const newSources = sources.filter((source) => !source.id);
+
+  const existingSources = sources.filter((source) =>
+    sourceIds.find((s) => s.id === source.id)
+  );
+
+  const unknownSourceIDs = sources
+    .flatMap((source) => (source.id ? [source.id] : []))
+    .filter((sourceId) => !sourceIds.find((s) => s.id === sourceId))
+    .map((sourceId) => sourceId.toString());
+
+  if (unknownSourceIDs.length) {
+    throw new UserInputError(
+      `Unknown source${unknownSourceIDs.length > 1 ? "s" : ""} for album ${
+        parsedAlbum.id
+      }: ${unknownSourceIDs.join(", ")}`
+    );
+  }
+
+  return prisma.album.update({
+    where: {
+      id: parsedAlbum.id,
+    },
+    data: {
+      ...parsedAlbum,
+      ...firstPlayed,
+      sources: {
+        create: newSources,
+        update: existingSources.map((source) => ({
+          where: {
+            id: source.id,
+          },
+          data: source,
+        })),
+        delete: sourceIdsToDelete,
+      },
+    },
   });
 };
