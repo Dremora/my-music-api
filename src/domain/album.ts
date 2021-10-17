@@ -18,7 +18,14 @@ const newSourceSchema = z.object({
   edition: z.nullable(z.optional(z.string().max(255).transform(trim))),
   format: z.nullable(z.optional(z.enum(Format.members))),
   location: z.enum(Location.members),
-  mbid: z.nullable(z.optional(z.string().length(36))), // TODO regex)?
+  mbid: z.nullable(
+    z.optional(
+      z
+        .string()
+        .length(36)
+        .regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
+    )
+  ),
   tagIssues: z.nullable(z.optional(z.string().max(255).transform(trim))),
 });
 
