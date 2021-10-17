@@ -44,7 +44,8 @@ export const albumsQuery = queryField("albums", {
       where
         edge_gram_tsvector(unaccent(title)) ||
         edge_gram_tsvector(unaccent(artist)) ||
-        edge_gram_tsvector(year :: text) @@ plainto_tsquery('simple', unaccent(${query}))
+        coalesce(edge_gram_tsvector(coalesce(year :: text)), array_to_tsvector('{}'))
+        @@ plainto_tsquery('simple', unaccent(${query}))
       limit
         50`;
 
