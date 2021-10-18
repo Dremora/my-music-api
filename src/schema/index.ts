@@ -1,5 +1,6 @@
 import { join } from "path";
 
+import { ForbiddenError } from "apollo-server";
 import { fieldAuthorizePlugin, makeSchema } from "nexus";
 
 import * as types from "./types";
@@ -18,5 +19,11 @@ export const schema = makeSchema({
     typegen: join(__dirname, "..", "nexus-typegen.ts"),
     schema: join(__dirname, "..", "schema.graphql"),
   },
-  plugins: [fieldAuthorizePlugin()],
+  plugins: [
+    fieldAuthorizePlugin({
+      formatError: () => {
+        return new ForbiddenError("Unauthorized to access the field");
+      },
+    }),
+  ],
 });
