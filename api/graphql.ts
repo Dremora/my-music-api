@@ -18,7 +18,7 @@ export default async (
 ): Promise<void> => {
   await startServer;
   await server.createHandler({
-    path: "/api",
+    path: "/graphql",
   })(req, res);
 };
 
