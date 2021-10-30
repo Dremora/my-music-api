@@ -38,7 +38,7 @@ export const Album = objectType({
       resolve(parent, _, ctx) {
         return ctx.prisma.source.findMany({
           where: {
-            albums: {
+            album: {
               id: parent.id,
             },
           },

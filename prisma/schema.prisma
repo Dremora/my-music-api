@@ -41,7 +41,7 @@ model Source {
   albumId     String   @map("album_id") @db.Uuid
   createdAt   DateTime @default(now()) @map("inserted_at") @db.Timestamp(6)
   updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamp(6)
-  albums      Album    @relation(fields: [albumId], references: [id])
+  album       Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
 
   @@index([albumId], map: "album_sources_album_id_index")
   @@map("album_sources")

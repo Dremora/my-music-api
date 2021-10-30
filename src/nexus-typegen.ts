@@ -136,6 +136,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createAlbum: NexusGenRootTypes['Album']; // Album!
+    deleteAlbum: boolean; // Boolean!
     login: boolean; // Boolean!
     updateAlbum: NexusGenRootTypes['Album']; // Album!
   }
@@ -184,6 +185,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createAlbum: 'Album'
+    deleteAlbum: 'Boolean'
     login: 'Boolean'
     updateAlbum: 'Album'
   }
@@ -217,6 +219,9 @@ export interface NexusGenArgTypes {
       sources: NexusGenInputs['NewSourceInput'][]; // [NewSourceInput!]!
       title: string; // String!
       year?: number | null; // Int
+    }
+    deleteAlbum: { // args
+      id: NexusGenScalars['UUID']; // UUID!
     }
     login: { // args
       password: string; // String!

@@ -60,6 +60,7 @@ enum Location {
 
 type Mutation {
   createAlbum(artist: String!, comments: String, firstPlayed: FirstPlayedInput, sources: [NewSourceInput!]!, title: String!, year: Int): Album!
+  deleteAlbum(id: UUID!): Boolean!
   login(password: String!): Boolean!
   updateAlbum(artist: String!, comments: String, firstPlayed: FirstPlayedInput, id: UUID!, sources: [SourceInput!]!, title: String!, year: Int): Album!
 }
