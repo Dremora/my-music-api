@@ -1,5 +1,4 @@
 import { UserInputError } from "apollo-server";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { ApolloServerExpressConfig } from "apollo-server-express";
 import { ZodError } from "zod";
 

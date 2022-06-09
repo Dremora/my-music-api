@@ -1,11 +1,10 @@
+import { PrismaClient } from "@prisma/client";
 import { UserInputError } from "apollo-server";
 import { fromUnixTime } from "date-fns";
 import { Format, Location } from "nexus-prisma";
 import { z } from "zod";
 
 import { NexusGenArgTypes } from "src/nexus-typegen";
-
-import { PrismaClient } from ".prisma/client";
 
 const trim = (str: string) => str.trim();
 
