@@ -42,10 +42,10 @@ export const albumsQuery = queryField("albums", {
       from
         albums
       where
-        edge_gram_tsvector(unaccent(title)) ||
-        edge_gram_tsvector(unaccent(artist)) ||
+        edge_gram_tsvector(immutable_unaccent(title)) ||
+        edge_gram_tsvector(immutable_unaccent(artist)) ||
         coalesce(edge_gram_tsvector(coalesce(year :: text)), array_to_tsvector('{}'))
-        @@ plainto_tsquery('simple', unaccent(${query}))
+        @@ plainto_tsquery('simple', immutable_unaccent(${query}))
       limit
         50`;
 
