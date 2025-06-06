@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only -- ./src/index.ts",
     "dev:typecheck": "tsc --noEmit --watch",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "prisma generate --sql",
     "prisma:introspect": "prisma introspect",
     "types:generate": "ts-node --transpile-only src/schema",
     "db:migrate": "prisma migrate deploy",

@@ -1,17 +1,6 @@
-import { parseISO } from "date-fns";
+import type { Album } from "@prisma/client";
+import { getAlbumsByQuery } from "@prisma/client/sql";
 import { arg, list, queryField } from "nexus";
-
-type RawAlbum = {
-  id: string;
-  artist: string;
-  comments: string | null;
-  first_played_timestamp: string | null;
-  first_played_date: number[];
-  title: string;
-  year: number | null;
-  inserted_at: string;
-  updated_at: string;
-};
 
 export const albumsQuery = queryField("albums", {
   type: list("Album"),
@@ -28,26 +17,7 @@ export const albumsQuery = queryField("albums", {
         },
       });
     } else if (query) {
-      const albums = await ctx.prisma.$queryRaw<RawAlbum[]>`
-      select
-        id,
-        artist,
-        comments,
-        first_played_timestamp,
-        first_played_date,
-        title,
-        year,
-        inserted_at,
-        updated_at
-      from
-        albums
-      where
-        edge_gram_tsvector(immutable_unaccent(title)) ||
-        edge_gram_tsvector(immutable_unaccent(artist)) ||
-        coalesce(edge_gram_tsvector(coalesce(year :: text)), array_to_tsvector('{}'))
-        @@ plainto_tsquery('simple', immutable_unaccent(${query}))
-      limit
-        50`;
+      const albums = await ctx.prisma.$queryRawTyped(getAlbumsByQuery(query));
 
       return albums.map(
         ({
@@ -56,14 +26,16 @@ export const albumsQuery = queryField("albums", {
           inserted_at,
           updated_at,
           ...album
-        }) => ({
-          firstPlayedDate: first_played_date,
-          firstPlayedTimestamp: first_played_timestamp
-            ? parseISO(first_played_timestamp)
-            : null,
-          createdAt: parseISO(inserted_at),
-          updatedAt: parseISO(updated_at),
-          ...album,
+        }): Album => ({
+          firstPlayedDate: first_played_date ?? [],
+          firstPlayedTimestamp: first_played_timestamp,
+          createdAt: inserted_at,
+          updatedAt: updated_at,
+          artist: album.artist,
+          comments: album.comments,
+          title: album.title,
+          year: album.year,
+          id: album.id,
         })
       );
     } else {
