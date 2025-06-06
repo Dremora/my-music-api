@@ -6,11 +6,10 @@ export const albumQuery = queryField("album", {
     id: "UUID",
   },
   resolve(_, { id }, ctx) {
-    return ctx.prisma.album.findUnique({
+    return ctx.prisma.album.findUniqueOrThrow({
       where: {
         id,
       },
-      rejectOnNotFound: true,
     });
   },
 });

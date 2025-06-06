@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { UserInputError } from "apollo-server";
 import { fromUnixTime } from "date-fns";
-import { Format, Location } from "nexus-prisma";
 import { z } from "zod";
 
-import { NexusGenArgTypes } from "src/nexus-typegen";
+import { NexusGenArgTypes } from "../nexus-typegen";
+import { formats, locations } from "../schema/enums";
 
 const trim = (str: string) => str.trim();
 
@@ -15,8 +15,8 @@ const newSourceSchema = z.object({
   discs: z.nullable(z.optional(z.number().int().min(1).max(100))),
   download: z.nullable(z.optional(z.string().max(255).transform(trim))),
   edition: z.nullable(z.optional(z.string().max(255).transform(trim))),
-  format: z.nullable(z.optional(z.enum(Format.members))),
-  location: z.enum(Location.members),
+  format: z.nullable(z.optional(z.enum(formats))),
+  location: z.enum(locations),
   mbid: z.nullable(
     z.optional(
       z

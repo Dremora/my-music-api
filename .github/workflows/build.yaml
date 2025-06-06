@@ -9,18 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16.15.1
+          node-version-file: .tool-versions
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.1.9
+      - uses: pnpm/action-setup@v4
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma types
         run: pnpm prisma:generate

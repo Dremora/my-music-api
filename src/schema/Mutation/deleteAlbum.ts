@@ -1,4 +1,4 @@
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { arg, mutationField } from "nexus";
 
 export const deleteAlbum = mutationField("deleteAlbum", {
